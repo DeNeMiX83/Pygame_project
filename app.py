@@ -1,5 +1,6 @@
 import asyncio
 import threading
+from time import sleep
 
 from data.config import *
 from sprites.config import all_sprites, player_sprites

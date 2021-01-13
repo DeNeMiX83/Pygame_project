@@ -1,8 +1,11 @@
+from time import sleep
+
 import pygame
 
 
 from data.config import size, width, height, FPS
 from data.images.funk import load_image
+from sprites.bum import Bum
 from sprites.config import all_sprites, menu_sprites, player_sprites, meteors_sprites
 from sprites.player.space_ship_shot import SpaceShipShot
 from sprites.show_hp import ShowHP
@@ -66,4 +69,6 @@ class SpaceShip(pygame.sprite.Sprite):
         self.show_hp()
         if self.hp <= 0:
             self.stop = True
-            self.kill()
+            Bum(self, self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h // 2)
+            for fire in self.ship_fire:
+                fire.kill()
