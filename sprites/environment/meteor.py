@@ -4,6 +4,7 @@ import pygame
 from data.config import size, width, height, FPS
 from data.images.funk import load_image
 from sprites.config import all_sprites, meteors_sprites, player_sprites, shot_sprites
+from sprites.environment.koin import Koin
 from sprites.show_hp import ShowHP
 
 
@@ -59,6 +60,7 @@ class Meteor(pygame.sprite.Sprite):
         self.show_hp()
         if self.hp <= 0:
             self.kill()
+            Koin(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h // 2)
         if self.cur_frame_time % round(FPS / self.max_frame_time, 0) != 0:
             return
         self.cur_frame = (self.cur_frame + 1) % len(self.frames)

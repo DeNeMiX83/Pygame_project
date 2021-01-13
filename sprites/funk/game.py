@@ -28,7 +28,7 @@ def create_meteor():
     global cur_meteor
     cur_meteor += 1
     x = choice(range(0, width))
-    y = choice(range(0 - height, -50))
+    y = choice(range(0 - height - 100, -100))
     if cur_meteor % (FPS / max_meteor) == 0:
         Meteor(x, y)
 

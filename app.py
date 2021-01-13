@@ -21,14 +21,13 @@ if __name__ == '__main__':
     size = width, height = size
     screen = screen
     player = start_screen(screen)
+    pygame.mouse.set_visible(False)
     running = True
     clock = pygame.time.Clock()
     create_meteor()
-    # meteor_thread = threading.Thread(target=create_meteor)
-    # meteor_thread.start()
     while running:
         screen.fill((0, 0, 0))
-        if not player.groups():
+        if not player.alive():
             player = game_over()
         check_event()
         all_sprites.draw(screen)

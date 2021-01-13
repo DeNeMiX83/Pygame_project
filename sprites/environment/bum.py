@@ -5,6 +5,7 @@ from data.config import size, width, height, FPS
 from data.images.funk import load_image
 from sprites.config import all_sprites, player_sprites
 
+pygame.time.set_timer(pygame.USEREVENT, 3000)
 
 class Bum(pygame.sprite.Sprite):
     def __init__(self, ship, x, y):
@@ -12,12 +13,12 @@ class Bum(pygame.sprite.Sprite):
         columns, rows = 5, 4
         self.frames = []
         self.cur_frame = 0
-        sheet = load_image(['bum.png'], -1)
+        sheet = load_image(['environment', 'bum.png'], -1)
         self.cut_sheet(sheet, columns, rows)
         self.image = self.frames[self.cur_frame]
         self.rect.x = x - self.rect.w // 2
         self.rect.y = y - self.rect.h // 2
-        self.time_tik = 0.1
+        self.time_tik = 0.12
         self.put_timer()
         self.ship = ship
 
