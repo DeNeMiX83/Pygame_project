@@ -8,7 +8,7 @@ from sprites.player.lvl_1.lvl1 import ShipLevel1
 from sprites.player.space_ship import SpaceShip
 
 cur_meteor = -1
-max_meteor = 4
+max_meteor = 2
 meteor_max_img = 2
 
 

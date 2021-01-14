@@ -10,6 +10,7 @@ class ShipLevel1(SpaceShip):
         self.shot_max = 2
         self.damage = 30
         self.ship_fire = []
+        self.time_tik = 0.2
         self.put_fire()
 
     def put_fire(self):

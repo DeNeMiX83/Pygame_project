@@ -6,13 +6,14 @@ import pygame
 
 from data.config import size, width, height, FPS
 from data.images.funk import load_image
+from sprites.base_time import BaseTime
 from sprites.environment.bum import Bum
 from sprites.config import all_sprites, menu_sprites, player_sprites, meteors_sprites
 from sprites.player.space_ship_shot import SpaceShipShot
 from sprites.show_hp import ShowHP
 
 
-class SpaceShip(pygame.sprite.Sprite):
+class SpaceShip(BaseTime):
     def __init__(self, type):
         super(SpaceShip, self).__init__(all_sprites, menu_sprites, player_sprites)
         self.image = load_image(['player', f'lvl_{type}', f'lvl{type}.png'])
@@ -29,11 +30,7 @@ class SpaceShip(pygame.sprite.Sprite):
         self.ship_fire = []
         self.time_tik = 0.2
         self.put_timer()
-        self.power_magnet = 30
-
-    def put_timer(self):
-        self.time_cur = time.time()
-        self.time_stop = self.time_cur + self.time_tik
+        self.power_magnet = 50
 
     def show_hp(self):
         # self.sprite_hp.move(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h, self.hp / self.hp_max)
@@ -67,7 +64,7 @@ class SpaceShip(pygame.sprite.Sprite):
         if self.hp <= 0:
             self.stop = True
             Bum(self, self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h // 2)
+            self.remove(all_sprites)
             for fire in self.ship_fire:
-                self.remove(all_sprites)
                 fire.kill()
 
