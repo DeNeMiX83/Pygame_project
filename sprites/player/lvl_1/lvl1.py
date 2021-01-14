@@ -5,7 +5,7 @@ from sprites.player.space_ship import SpaceShip
 class ShipLevel1(SpaceShip):
     def __init__(self, lvl):
         super(ShipLevel1, self).__init__(lvl)
-        self.hp_max = 1
+        self.hp_max = 1000
         self.hp = self.hp_max
         self.shot_max = 2
         self.damage = 30

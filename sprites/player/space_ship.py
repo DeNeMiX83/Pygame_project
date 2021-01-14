@@ -29,6 +29,7 @@ class SpaceShip(pygame.sprite.Sprite):
         self.ship_fire = []
         self.time_tik = 0.2
         self.put_timer()
+        self.power_magnet = 30
 
     def put_timer(self):
         self.time_cur = time.time()

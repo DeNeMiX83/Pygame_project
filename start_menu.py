@@ -7,6 +7,7 @@ from sprites.config import all_sprites, menu_sprites, player_sprites, meteors_sp
 from sprites.funk.game import create_space, show_space_ship
 from sprites.menu.btn_exit import BtnExit
 from sprites.menu.btn_start import BtnStart
+from sprites.menu.choice_ship import ChoiceShip
 from sprites.menu.game_over import GameOver
 from sprites.menu.view_space_ship import ViewSpaceShip
 
@@ -50,6 +51,7 @@ def start_screen(screen):
     space_ship_type = 1
     clock = pygame.time.Clock()
     create_space()
+    ChoiceShip()
     ViewSpaceShip()
     btn_start = BtnStart()
     btn_exit = BtnExit()

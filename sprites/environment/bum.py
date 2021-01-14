@@ -5,7 +5,6 @@ from data.config import size, width, height, FPS
 from data.images.funk import load_image
 from sprites.config import all_sprites, player_sprites
 
-pygame.time.set_timer(pygame.USEREVENT, 3000)
 
 class Bum(pygame.sprite.Sprite):
     def __init__(self, ship, x, y):

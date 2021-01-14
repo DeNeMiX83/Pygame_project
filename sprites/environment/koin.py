@@ -37,6 +37,13 @@ class Koin(pygame.sprite.Sprite):
     def update(self, *arg):
         if pygame.sprite.spritecollideany(self, player_sprites, pygame.sprite.collide_circle):
             self.kill()
+        for ship in  pygame.sprite.spritecollide(self, player_sprites, False, pygame.sprite.collide_circle_ratio(1.7)):
+            d_x = ship.rect.x - self.rect.x
+            d_y = ship.rect.y - self.rect.y
+            if d_x > 0:
+                self.rect.x += 10
+            if d_y > 0:
+                self.rect.y += 10
         if time.time() < self.time_stop:
             return
         self.cur_frame = (self.cur_frame + 1) % len(self.frames)
