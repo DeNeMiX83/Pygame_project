@@ -9,6 +9,7 @@ from data.images.funk import load_image
 from sprites.base_time import BaseTime
 from sprites.environment.bum import Bum
 from sprites.config import all_sprites, menu_sprites, player_sprites, meteors_sprites
+from sprites.player.fire import ShipFire
 from sprites.player.space_ship_shot import SpaceShipShot
 from sprites.show_hp import ShowHP
 
@@ -24,7 +25,7 @@ class SpaceShip(BaseTime):
         self.type = type
         self.hp_max = 1000
         self.hp = self.hp_max
-        self.sprite_hp = ShowHP(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h, 1)
+        self.sprite_hp = ShowHP(width // 2, height - 15, self.hp / self.hp_max, 15, width)
         self.damage = 40
         self.weapon_damage = 12
         self.ship_fire = []
@@ -33,6 +34,8 @@ class SpaceShip(BaseTime):
         self.put_timer()
         self.power_magnet = 50
         self.stop = False
+        # self.put_fire()
+        # self.create_fire()
 
     def show_hp(self):
         # self.sprite_hp.move(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h, self.hp / self.hp_max)
@@ -61,13 +64,20 @@ class SpaceShip(BaseTime):
         self.rect.midtop = pos
         self.rect.move_ip(0, -self.rect.height // 2)
 
+    def put_fire(self):
+        self.fire_cord = [(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h)]
+
+    def create_fire(self):
+        self.ship_fire = [ShipFire(*cord) for cord in self.fire_cord]
+
     def update(self, *args):
         if self.stop:
             return
         self.follow_the_mouse()
+        self.put_fire()
         for n, fire in enumerate(self.ship_fire):
-            # fire.move(*self.fire_cord[n])
-            fire.move(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h)
+            fire.move(*self.fire_cord[n])
+            # fire.move(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h)
         if pygame.sprite.spritecollide(self, meteors_sprites, False, pygame.sprite.collide_circle):
             self.hp -= 50
         self.can_shoot()

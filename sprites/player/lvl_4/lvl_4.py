@@ -12,7 +12,8 @@ class ShipLevel4(SpaceShip):
         self.ship_fire = []
         self.time_tik = 0.2
         self.put_fire()
+        self.create_fire()
 
     def put_fire(self):
-        self.ship_fire.append(ShipFire(self.rect.x + self.rect.w, self.rect.y + self.rect.h))
+        self.fire_cord = [(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h)]
 

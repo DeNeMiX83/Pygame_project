@@ -3,14 +3,14 @@ import time
 import pygame
 
 from data.images.funk import load_image
-from game_things import koins
+import game_things
 from sprites.base_animate_sprite import BaseAnimateSprite
-from sprites.config import all_sprites, player_sprites
+from sprites.config import all_sprites, player_sprites, menu_sprites
 
 
 class Koin(BaseAnimateSprite):
     def __init__(self, x, y):
-        super(Koin, self).__init__(all_sprites)
+        super(Koin, self).__init__(all_sprites, menu_sprites)
         columns, rows = 3, 2
         sheet = load_image(['environment', 'koin.png'], -1)
         self.cut_sheet(sheet, columns, rows)
@@ -23,7 +23,7 @@ class Koin(BaseAnimateSprite):
 
     def update(self, *arg):
         if pygame.sprite.spritecollideany(self, player_sprites, pygame.sprite.collide_circle):
-            # koins += 1
+            game_things.koins += 1
             self.kill()
         for ship in pygame.sprite.spritecollide(self, player_sprites, False,
                                                 pygame.sprite.collide_circle_ratio(1.7)):

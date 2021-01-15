@@ -11,8 +11,10 @@ class ShipLevel1(SpaceShip):
         self.weapon_damage = 8
         self.time_tik = 0.2
         self.put_fire()
+        self.create_fire()
 
     def put_fire(self):
         self.fire_cord = [(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h)]
-        self.ship_fire.append(ShipFire(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h))
+
+
 
