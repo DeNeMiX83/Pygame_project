@@ -12,8 +12,8 @@ class Bum(BaseAnimateSprite):
         super(Bum, self).__init__(all_sprites)
         columns, rows = 5, 4
         sheet = load_image(['environment', 'bum.png'], -1)
-        self.image = self.frames[self.cur_frame]
         self.cut_sheet(sheet, columns, rows)
+        self.image = self.frames[self.cur_frame]
         self.rect.x = x - self.rect.w // 2
         self.rect.y = y - self.rect.h // 2
         self.time_tik = 0.12

@@ -3,6 +3,7 @@ import time
 import pygame
 
 from data.images.funk import load_image
+from game_things import koins
 from sprites.base_animate_sprite import BaseAnimateSprite
 from sprites.config import all_sprites, player_sprites
 
@@ -22,6 +23,7 @@ class Koin(BaseAnimateSprite):
 
     def update(self, *arg):
         if pygame.sprite.spritecollideany(self, player_sprites, pygame.sprite.collide_circle):
+            # koins += 1
             self.kill()
         for ship in pygame.sprite.spritecollide(self, player_sprites, False,
                                                 pygame.sprite.collide_circle_ratio(1.7)):

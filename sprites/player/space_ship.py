@@ -15,22 +15,24 @@ from sprites.show_hp import ShowHP
 
 class SpaceShip(BaseTime):
     def __init__(self, type):
-        super(SpaceShip, self).__init__(all_sprites, menu_sprites, player_sprites)
+        super(SpaceShip, self).__init__(all_sprites,  player_sprites)
         self.image = load_image(['player', f'lvl_{type}', f'lvl{type}.png'])
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.x = width // 2 - self.rect.width // 2
         self.rect.y = height * 0.38 - self.rect.height // 2
-        self.stop = True
         self.type = type
         self.hp_max = 1000
         self.hp = self.hp_max
         self.sprite_hp = ShowHP(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h, 1)
         self.damage = 40
+        self.weapon_damage = 12
         self.ship_fire = []
+        self.fire_cord = []
         self.time_tik = 0.2
         self.put_timer()
         self.power_magnet = 50
+        self.stop = False
 
     def show_hp(self):
         # self.sprite_hp.move(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h, self.hp / self.hp_max)
@@ -43,8 +45,16 @@ class SpaceShip(BaseTime):
     def can_shoot(self):
         if time.time() >= self.time_stop:
             x = self.rect.x + self.rect.w // 2
-            SpaceShipShot(self.type, x, self.rect.y)
+            SpaceShipShot(self.type, x, self.rect.y, self.weapon_damage)
             self.put_timer()
+
+    def ship_kill(self):
+        self.stop = True
+        for fire in self.ship_fire:
+            fire.kill()
+        self.sprite_hp.kill()
+        self.remove(all_sprites)
+        Bum(self, self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h // 2)
 
     def follow_the_mouse(self):
         pos = pygame.mouse.get_pos()
@@ -55,16 +65,13 @@ class SpaceShip(BaseTime):
         if self.stop:
             return
         self.follow_the_mouse()
-        for fire in self.ship_fire:
+        for n, fire in enumerate(self.ship_fire):
+            # fire.move(*self.fire_cord[n])
             fire.move(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h)
         if pygame.sprite.spritecollide(self, meteors_sprites, False, pygame.sprite.collide_circle):
             self.hp -= 50
         self.can_shoot()
         self.show_hp()
         if self.hp <= 0:
-            self.stop = True
-            Bum(self, self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h // 2)
-            self.remove(all_sprites)
-            for fire in self.ship_fire:
-                fire.kill()
+            self.ship_kill()
 
