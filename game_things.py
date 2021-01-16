@@ -1,13 +1,9 @@
-from sprites.funk.game import get_space_ship
+import json
 
 
 def get_info():
-    info = {}
-    with open('data\save') as f:
-        for i in f:
-            name, value = i.strip().split('=')
-            info[name] = int(value) if value.isdigit() else value
-    return info
+    with open('data\save.json') as f:
+        return json.loads(f.read())
 
 
 info = get_info()

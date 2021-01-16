@@ -3,12 +3,8 @@ from sprites.player.space_ship import SpaceShip
 
 
 class ShipLevel2(SpaceShip):
-    def __init__(self, type):
-        super(ShipLevel2, self).__init__(type)
-        self.hp_max = 2000
-        self.hp = self.hp_max
-        self.damage = 40
-        self.weapon_damage = 20
+    def __init__(self, type, damage=40, weapon_damage=20, power_magnet=2.4, hp_max=2000):
+        super(ShipLevel2, self).__init__(type, damage, weapon_damage, power_magnet, hp_max)
         self.ship_fire = []
         self.time_tik = 0.2
         self.put_fire()

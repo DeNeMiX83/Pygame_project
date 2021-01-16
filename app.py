@@ -22,8 +22,8 @@ def check_event():
 if __name__ == '__main__':
     size = width, height = size
     start_screen()
-    player = get_space_ship(info['ship_type'])
     pygame.mouse.set_visible(False)
+    player = get_space_ship(info['ship_type'])
     running = True
     clock = pygame.time.Clock()
     create_meteor()

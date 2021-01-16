@@ -1,3 +1,4 @@
+import json
 import sys
 from random import choice
 
@@ -27,9 +28,8 @@ ship = None
 
 
 def terminate():
-    with open('data/save', 'w') as f:
-        for name, value in info.items():
-            f.write(f'{name}={value}\n')
+    with open('data/save.json', 'w') as f:
+        f.write(json.dumps(info, indent=4))
     pygame.quit()
     sys.exit()
 
@@ -81,7 +81,7 @@ def view_ships():
             ship_type += 1
             okno = ViewSpaceShip(ship_type, x, y)
             ShowShip(x, y, ship_type)
-            if info[f'ship_{ship_type}'] == 'close':
+            if info[f'ship_{ship_type}']['condition'] == 'close':
                 BtnBuyShip(x, y + okno.rect.h * 0.57, setting[f'ship_{ship_type}_price'], ship_type)
                 CloseShip(x, y, ship_type)
                 okno.enable = False

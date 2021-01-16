@@ -19,7 +19,7 @@ class ShipFire(BaseAnimateSprite):
         self.put_timer()
 
     def move(self, x, y):
-        self.rect.x = x - self.rect.w // 2
+        self.rect.x = x - self.rect.w // 2 + 2
         self.rect.y = y
 
     def update(self, *arg):

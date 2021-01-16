@@ -1,6 +1,7 @@
 from random import choice
 
 from data.config import height, FPS, width
+from game_things import info
 from sprites.config import all_sprites, menu_sprites, player_sprites, meteors_sprites, shot_sprites
 from sprites.environment.meteor import Meteor
 from sprites.environment.space import Space
@@ -22,14 +23,18 @@ def create_space():
 
 def get_space_ship(type):
     ship = None
+    damage = info[f'ship_{type}']['damage']
+    weapon_damage = info[f'ship_{type}']['weapon_damage']
+    power_magnet = info[f'ship_{type}']['power_magnet']
+    hp_max = info[f'ship_{type}']['hp_max']
     if type == 1:
-        ship = ShipLevel1(type)
+        ship = ShipLevel1(type, damage, weapon_damage, power_magnet, hp_max)
     if type == 2:
-        ship = ShipLevel2(type)
+        ship = ShipLevel2(type, damage, weapon_damage, power_magnet, hp_max)
     if type == 3:
-        ship = ShipLevel3(type)
+        ship = ShipLevel3(type, damage, weapon_damage, power_magnet, hp_max)
     if type == 4:
-        ship = ShipLevel4(type)
+        ship = ShipLevel4(type, damage, weapon_damage, power_magnet, hp_max)
     return ship
 
 
