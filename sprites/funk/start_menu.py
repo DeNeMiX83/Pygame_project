@@ -1,13 +1,14 @@
 import sys
 from random import choice
-from data.config import width, height
+
 import pygame
 
+from data.config import width, height
 from sprites.config import all_sprites
 from sprites.environment.space import Space
 from sprites.menu.btn_exit import BtnExit
 from sprites.menu.btn_start import BtnStart
-from sprites.menu.view_space_ship import ViewSpaceShip
+from sprites.menu.view_choice_ship import ViewSpaceShip
 from sprites.player.space_ship import SpaceShip
 
 FPS = 50

@@ -1,5 +1,5 @@
 {
-    "koins": 397,
+    "koins": 7039,
     "ship_1": {
         "condition": "open",
         "damage": 30,
@@ -8,25 +8,25 @@
         "hp_max": 1000
     },
     "ship_2": {
-        "condition": "open",
+        "condition": "close",
         "damage": 40,
         "weapon_damage": 20,
         "power_magnet": 2.4,
         "hp_max": 2000
     },
     "ship_3": {
-        "condition": "open",
+        "condition": "close",
         "damage": 45,
         "weapon_damage": 30,
         "power_magnet": 2.6,
         "hp_max": 3000
     },
     "ship_4": {
-        "condition": "open",
+        "condition": "close",
         "damage": 50,
         "weapon_damage": 35,
         "power_magnet": 3,
         "hp_max": 4000
     },
-    "ship_type": 4
+    "ship_type": 1
 }

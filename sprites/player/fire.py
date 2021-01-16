@@ -1,6 +1,7 @@
 import time
 
 import pygame
+
 from data.config import size, width, height, FPS
 from data.images.funk import load_image
 from sprites.base_animate_sprite import BaseAnimateSprite

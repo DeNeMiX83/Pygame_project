@@ -1,4 +1,5 @@
 import pygame
+
 from data.config import size, width, height, screen
 from data.images.funk import load_image
 from sprites.config import all_sprites, menu_sprites

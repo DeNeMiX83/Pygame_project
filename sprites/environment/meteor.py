@@ -2,17 +2,18 @@ import time
 from random import choice, randrange
 
 import pygame
+
 from data.config import size, width, height, FPS
 from data.images.funk import load_image
 from sprites.base_animate_sprite import BaseAnimateSprite
-from sprites.config import all_sprites, meteors_sprites, player_sprites, shot_sprites
+from sprites.config import all_sprites, meteors_sprites, player_sprites, shot_sprites, menu_sprites
 from sprites.environment.koin import Koin
 from sprites.show_hp import ShowHP
 
 
 class Meteor(BaseAnimateSprite):
     def __init__(self, x, y, type=1):
-        super(Meteor, self).__init__(all_sprites, meteors_sprites)
+        super(Meteor, self).__init__(all_sprites, meteors_sprites, menu_sprites)
         columns, rows = 8, 8
         sheet = load_image(['environment', f'meteors.png'], -1)
         self.cut_sheet(sheet, columns, rows)

@@ -1,4 +1,5 @@
 import pygame
+
 from data.config import size, width, height
 from data.images.funk import load_image
 from sprites.config import all_sprites, shot_sprites

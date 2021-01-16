@@ -3,12 +3,11 @@ from time import sleep
 
 import pygame
 
-
 from data.config import size, width, height, FPS
 from data.images.funk import load_image
 from sprites.base_time import BaseTime
-from sprites.environment.bum import Bum
 from sprites.config import all_sprites, menu_sprites, player_sprites, meteors_sprites, koin_sprites
+from sprites.environment.bum import Bum
 from sprites.player.fire import ShipFire
 from sprites.player.space_ship_shot import SpaceShipShot
 from sprites.show_hp import ShowHP

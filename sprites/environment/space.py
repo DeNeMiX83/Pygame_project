@@ -1,6 +1,7 @@
 from random import choice
 
 import pygame
+
 from data.config import size, width, height
 from sprites.config import all_sprites, menu_sprites
 
@@ -16,7 +17,7 @@ class Space(pygame.sprite.Sprite):
         screen = pygame.Surface(size)
         for _ in range(n):
             pygame.draw.circle(screen, (255, 255, 255),
-                               (choice(range(width)), choice(range(height - 2))), 1)
+                               (choice(range(width)), choice(range(height - 2))), choice(range(1, 3)))
         return screen
 
     def update(self, *arg):
