@@ -1,1 +1,6 @@
-koins=65
+koins=200
+ship_1=open
+ship_2=open
+ship_3=close
+ship_4=close
+ship_type=2

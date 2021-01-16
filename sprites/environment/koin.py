@@ -23,7 +23,7 @@ class Koin(BaseAnimateSprite):
 
     def update(self, *arg):
         if pygame.sprite.spritecollideany(self, player_sprites, pygame.sprite.collide_circle):
-            game_things.koins += 1
+            game_things.game_koins += 1
             self.kill()
         for ship in pygame.sprite.spritecollide(self, player_sprites, False,
                                                 pygame.sprite.collide_circle_ratio(1.7)):

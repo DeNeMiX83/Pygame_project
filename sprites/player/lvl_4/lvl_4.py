@@ -9,6 +9,7 @@ class ShipLevel4(SpaceShip):
         self.hp = self.hp_max
         self.damage = 30
         self.weapon_damage = 35
+        self.power_magnet = 100
         self.ship_fire = []
         self.time_tik = 0.2
         self.put_fire()

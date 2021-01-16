@@ -77,7 +77,6 @@ class SpaceShip(BaseTime):
         self.put_fire()
         for n, fire in enumerate(self.ship_fire):
             fire.move(*self.fire_cord[n])
-            # fire.move(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h)
         if pygame.sprite.spritecollide(self, meteors_sprites, False, pygame.sprite.collide_circle):
             self.hp -= 50
         self.can_shoot()

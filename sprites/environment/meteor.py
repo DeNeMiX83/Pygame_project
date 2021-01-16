@@ -18,7 +18,7 @@ class Meteor(BaseAnimateSprite):
         self.cut_sheet(sheet, columns, rows)
         self.image = self.frames[self.cur_frame]
         self.place()
-        self.radius = self.rect.w // 2 - 60
+        self.radius = self.rect.w * 0.20
         self.time_tik = 0.1
         self.max_hp = 70
         self.hp = self.max_hp

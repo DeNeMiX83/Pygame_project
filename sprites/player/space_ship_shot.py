@@ -5,7 +5,7 @@ from sprites.config import all_sprites, shot_sprites
 
 
 class SpaceShipShot(pygame.sprite.Sprite):
-    def __init__(self, type, x, y, damage=10):
+    def __init__(self, type, x, y, damage=100):
         super(SpaceShipShot, self).__init__(all_sprites, shot_sprites)
         self.image = load_image(['player', f'lvl_{type}', f'shot.png'])
         self.mask = pygame.mask.from_surface(self.image)

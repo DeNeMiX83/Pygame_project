@@ -27,3 +27,4 @@ class Bum(BaseAnimateSprite):
         self.put_timer()
         if self.cur_frame == len(self.frames) - 1:
             self.ship.kill()
+

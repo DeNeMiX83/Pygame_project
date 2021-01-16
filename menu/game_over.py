@@ -2,9 +2,10 @@ import pygame
 
 from data.config import screen, FPS, width, height
 import game_things
+from game_things import info
 from sprites.config import all_sprites, menu_sprites, player_sprites, meteors_sprites, shot_sprites
 from sprites.menu.game_over import GameOver
-from start_menu import terminate, start_screen
+from menu.start_menu import terminate, start_screen
 
 
 def view_koins(koins):
@@ -24,14 +25,15 @@ def clear_sprites_group():
     shot_sprites.empty()
 
 
-def game_over(ship_type):
+def game_over():
     pygame.mouse.set_visible(True)
     clear_sprites_group()
     clock = pygame.time.Clock()
     screen.fill((0, 0, 0))
     GameOver()
-    koins = game_things.koins
-    game_things.info['koins'] += koins
+    koins = game_things.game_koins
+    game_things.game_koins = 0
+    info['koins'] += koins
     view_koins(koins)
     while True:
         for event in pygame.event.get():
@@ -39,7 +41,8 @@ def game_over(ship_type):
                 terminate()
             elif event.type == pygame.KEYDOWN or \
                     event.type == pygame.MOUSEBUTTONDOWN:
-                return start_screen(screen, ship_type)
+                start_screen()
+                return
         menu_sprites.update()
         menu_sprites.draw(screen)
         pygame.display.flip()
