@@ -3,26 +3,25 @@ from data.images.funk import load_image
 
 
 class BaseResize(pygame.sprite.Sprite):
-    def __init__(self, *group, dir='menu'):
+    def __init__(self, *group, dir='menu', d_size=1.1):
         super(BaseResize, self).__init__(*group)
-        # self.image_1 = 'btn_exit_1.png'
-        # self.image_2 = 'btn_exit_2.png'
+        # self.image = 'btn_exit.png'
         self.dir = dir
+        self.d_size = d_size
         # self.put_image()
 
-    def put_image(self):
-        if isinstance(self.image_1, str):
-            self.image = load_image([self.dir, self.image_1])
-        else:
-            self.image = self.image_1
+    def put_image(self, load=True):
+        if load:
+            rect = self.image.get_rect()
+            self.image_1 = self.image
+            self.image_2 = pygame.transform.scale(self.image, (
+                int(rect.w * self.d_size), int(rect.h * self.d_size)))
+        self.image = self.image_1
         self.rect = self.image.get_rect()
 
     def resize(self, image):
         center = self.rect.center
-        if isinstance(image, str):
-            self.image = load_image([self.dir, image])
-        else:
-            self.image = image
+        self.image = image
         self.rect = self.image.get_rect()
         self.rect.center = center
 
