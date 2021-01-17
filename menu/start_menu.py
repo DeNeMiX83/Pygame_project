@@ -12,6 +12,9 @@ from sprites.config import all_sprites, menu_sprites, player_sprites, meteors_sp
     choice_ship_sprites, menu_ships_sprites
 from sprites.environment.koin import Koin
 from sprites.funk.game import create_space, create_meteor
+from sprites.menu.btn_ship import BtnShip
+from sprites.menu.btn_specifications import BtnSpecific
+from sprites.menu.logotip import Logotip
 from sprites.menu.magaz import Magaz
 from sprites.menu.bth_buy import BtnBuyShip
 from sprites.menu.btn_exit import BtnExit
@@ -39,8 +42,10 @@ def terminate():
 def start_screen():
     clock = pygame.time.Clock()
     create_space()
-    magaz = view_ships()
+    magaz, btn_specific, btn_ship = view_magaz()
+    view_ships(magaz)
     Fon()
+    Logotip()
     Magaz(magaz.rect.center)
     okno_choice_ship = ViewSpaceShip(d_w=0.54, d_h=0.39)
     okno_center_x = okno_choice_ship.rect.x + okno_choice_ship.rect.w // 2
@@ -59,11 +64,17 @@ def start_screen():
                     menu_sprites.empty()
                     koins.remove(all_sprites)
                     return
+                if btn_specific.rect.collidepoint(event.pos):
+                    for sprite in choice_ship_sprites:
+                        sprite.kill()
+                if btn_ship.rect.collidepoint(event.pos) and not choice_ship_sprites.sprites():
+                    # for sprite in choice_ship_sprites:
+                    #     sprite.kill()
+                    view_ships(magaz)
                 if btn_exit.rect.collidepoint(event.pos):
                     terminate()
                 for ikon in menu_ships_sprites:
                     if ikon.rect.collidepoint(event.pos) and ikon.enable:
-                        print(1)
                         ship.kill()
                         info['ship_type'] = ikon.ship_type
                         ship = MenuSpaceShip(info['ship_type'], okno_center_x, okno_center_y)
@@ -75,8 +86,14 @@ def start_screen():
         clock.tick(FPS)
 
 
-def view_ships():
+def view_magaz():
     window = ChoiceShip()
+    btn_spesific = BtnSpecific(window.rect)
+    btn_ship = BtnShip(window.rect)
+    return window, btn_spesific, btn_ship
+
+
+def view_ships(window):
     x_s = window.rect.x + window.rect.w // 4
     x_e = window.rect.x + window.rect.w
     y_s = window.rect.y + window.rect.h // 4
@@ -88,10 +105,10 @@ def view_ships():
             ship_type += 1
             ship = ShowShip(x, y, ship_type)
             if info[f'ship_{ship_type}']['condition'] == 'close':
-                BtnBuyShip(x, y + window.rect.h * 0.19, setting[f'ship_{ship_type}_price'], ship_type)
+                BtnBuyShip(x, y + window.rect.h * 0.19, setting[f'ship_{ship_type}_price'],
+                           ship_type)
                 CloseShip(x, y, ship_type)
                 ship.enable = False
-    return window
 
 
 def view_all_koins(koins, okno):
