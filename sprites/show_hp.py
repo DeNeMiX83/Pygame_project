@@ -7,13 +7,16 @@ from sprites.player.space_ship_shot import SpaceShipShot
 
 
 class ShowHP(pygame.sprite.Sprite):
-    def __init__(self, x, y, hp_procent, w=3, l=100):
+    def __init__(self, x, y, obj, w=3, l=100):
         super(ShowHP, self).__init__(all_sprites)
-        self.move(x, y, hp_procent, w, l)
+        self.obj = obj
+        self.move(x, y, w, l)
 
-    def move(self, x, y, hp_procent, w=3, l=100):
-        len_hp = l * hp_procent
-        if len_hp < 1:
+    def move(self, x, y, w=3, l=100):
+        len_hp = int(l * (self.obj.hp / self.obj.hp_max))
+        if not self.obj.alive():
+            print(1)
+        if len_hp < 1 or not self.obj.alive():
             self.kill()
             return
         self.image = pygame.surface.Surface((len_hp, w))

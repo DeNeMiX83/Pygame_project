@@ -12,12 +12,13 @@ from sprites.config import all_sprites, menu_sprites, player_sprites, meteors_sp
     choice_ship_sprites, menu_ships_sprites
 from sprites.environment.koin import Koin
 from sprites.funk.game import create_space, create_meteor
+from sprites.menu.magaz import Magaz
 from sprites.menu.bth_buy import BtnBuyShip
 from sprites.menu.btn_exit import BtnExit
 from sprites.menu.btn_start import BtnStart
 from sprites.menu.choice_ship import ChoiceShip
 from sprites.menu.close_ship import CloseShip
-from sprites.menu.cosmonavt import Cosmonavt
+from sprites.menu.fon import Fon
 from sprites.menu.game_over import GameOver
 from sprites.menu.view_choice_ship import ViewSpaceShip
 from sprites.player.menu_ship import MenuSpaceShip
@@ -35,13 +36,12 @@ def terminate():
     sys.exit()
 
 
-
-
 def start_screen():
     clock = pygame.time.Clock()
     create_space()
-    Cosmonavt()
-    view_ships()
+    magaz = view_ships()
+    Fon()
+    Magaz(magaz.rect.center)
     okno_choice_ship = ViewSpaceShip(d_w=0.54, d_h=0.39)
     okno_center_x = okno_choice_ship.rect.x + okno_choice_ship.rect.w // 2
     okno_center_y = okno_choice_ship.rect.y + okno_choice_ship.rect.h // 2
@@ -51,7 +51,6 @@ def start_screen():
     ship = MenuSpaceShip(info['ship_type'], okno_center_x, okno_center_y)
     while running:
         events = []
-        create_meteor()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 terminate()
@@ -67,7 +66,7 @@ def start_screen():
                         print(1)
                         ship.kill()
                         info['ship_type'] = ikon.ship_type
-                        ship = MenuSpaceShip(info['ship_type'])
+                        ship = MenuSpaceShip(info['ship_type'], okno_center_x, okno_center_y)
             events.append(event)
         menu_sprites.update(*events)
         menu_sprites.draw(screen)
@@ -92,6 +91,7 @@ def view_ships():
                 BtnBuyShip(x, y + window.rect.h * 0.19, setting[f'ship_{ship_type}_price'], ship_type)
                 CloseShip(x, y, ship_type)
                 ship.enable = False
+    return window
 
 
 def view_all_koins(koins, okno):

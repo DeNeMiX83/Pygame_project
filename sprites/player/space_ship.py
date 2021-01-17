@@ -27,7 +27,7 @@ class SpaceShip(BaseTime):
         self.rect.x = width // 2 - self.rect.width // 2
         self.rect.y = height * 0.38 - self.rect.height // 2
         self.type = type
-        self.sprite_hp = ShowHP(width // 2, height - 15, self.hp / self.hp_max, 15, width)
+        self.sprite_hp = ShowHP(width // 2, height - 15, self, 15, width)
         self.ship_fire = []
         self.fire_cord = []
         self.time_tik = 0.2
@@ -56,7 +56,7 @@ class SpaceShip(BaseTime):
         w = 15
         y = height - w
         prosent_hp = self.hp / self.hp_max
-        self.sprite_hp.move(x, y, prosent_hp, w, width)
+        self.sprite_hp.move(x, y, w, width)
 
     def can_shoot(self):
         if time.time() >= self.time_stop:
@@ -91,8 +91,10 @@ class SpaceShip(BaseTime):
         self.magnit_koin()
         for n, fire in enumerate(self.ship_fire):
             fire.move(*self.fire_cord[n])
-        if pygame.sprite.spritecollide(self, meteors_sprites, False, pygame.sprite.collide_circle):
+        for meteor in pygame.sprite.spritecollide(self, meteors_sprites, True, pygame.sprite.collide_circle):
             self.hp -= 50
+            meteor.sprite_hp.kill()
+            print(meteor)
         self.can_shoot()
         self.show_hp()
         if self.hp <= 0:
