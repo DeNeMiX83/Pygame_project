@@ -16,3 +16,4 @@ class MenuSpaceShip(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x - self.rect.width // 2
         self.rect.y = y * 1.06 - self.rect.height // 2
+        self.type_ship = type

@@ -45,5 +45,5 @@ class BtnBuySpecific(pygame.sprite.Sprite):
         if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
             if info['koins'] >= self.prise:
                 info['koins'] -= self.prise
-                info[f'{self.type_specific}'] += self.power
+                info[f'ship_{info["ship_type"]}'][f'{self.type_specific}'] += self.power
                 self.obj.up()

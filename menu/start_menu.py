@@ -15,6 +15,7 @@ from sprites.menu.shop.shop import Shop
 from sprites.menu.shop.btn_ship import BtnShip
 from sprites.menu.shop.btn_specifications import BtnSpecific
 from sprites.menu.shop.ships.bth_buy_ship import BtnBuyShip
+from sprites.menu.shop.specific.view_ship_specific import ViewShipSpecific
 from sprites.menu.view_choice_ship import ViewSpaceShip
 from sprites.menu.shop.ships.choice_ship import ChoiceShip
 from sprites.menu.shop.ships.close_ship import CloseShip
@@ -67,7 +68,7 @@ def start_screen():
                         not menu_specific_sprites.sprites():
                     for sprite in choice_ship_sprites:
                         sprite.kill()
-                    view_specific(magaz)
+                    view_specific(magaz, ship.type_ship)
                     icon_shop.kill()
                     icon_shop = Shop(magaz.rect.center)
                 if btn_ship.rect.collidepoint(event.pos) and not choice_ship_sprites.sprites():
@@ -116,7 +117,7 @@ def view_ships(window):
                 ship.enable = False
 
 
-def view_specific(window):
+def view_specific(window, type_ship):
     x_s = window.rect.x + window.rect.w // 4
     x_e = window.rect.x + window.rect.w
     y_s = window.rect.y + window.rect.h // 4
@@ -128,6 +129,7 @@ def view_specific(window):
         for x_n, x in enumerate(range(x_s, int(x_e - delta), window.rect.w // 2)):
             type_specific += 1
             if type_specific > len(specifics):
+                ViewShipSpecific(x, y, (window.rect.w // 2, window.rect.h // 4), type_ship)
                 return
             specific = Specific(x, y, specifics[type_specific - 1])
             price = setting[f'specific_{specifics[type_specific - 1]}_price']

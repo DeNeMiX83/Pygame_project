@@ -13,12 +13,12 @@ class SpecificUp(BaseAnimateSprite):
         columns, rows = 15, 1
         sheet = load_image(['menu', f'specific_up.png'])
         rect = sheet.get_rect()
-        d_size = 0.9
+        d_size = 0.4
         sheet = pygame.transform.scale(sheet, (int(rect.w * d_size), int(rect.h * d_size)))
         self.cut_sheet(sheet, columns, rows)
         self.image = self.frames[self.cur_frame]
         self.rect.x = x - self.rect.w // 2
-        self.rect.y = y - self.rect.h * 0.8
+        self.rect.y = y - self.rect.h * 0.68
         self.time_tik = 0.03
         self.put_timer()
 
