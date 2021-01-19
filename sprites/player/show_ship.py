@@ -1,10 +1,7 @@
-import time
-
 import pygame
 
-from data.config import width, height
 from data.images.funk import load_image
-from sprites.config import all_sprites, menu_sprites, menu_ships_sprites, choice_ship_sprites
+from sprites.config import menu_sprites, menu_ships_sprites, choice_ship_sprites
 from sprites.base_resize_sprite import BaseResize
 
 

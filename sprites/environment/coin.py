@@ -8,9 +8,9 @@ from sprites.base_animate_sprite import BaseAnimateSprite
 from sprites.config import all_sprites, player_sprites, menu_sprites, koin_sprites
 
 
-class Koin(BaseAnimateSprite):
+class Coin(BaseAnimateSprite):
     def __init__(self, x, y):
-        super(Koin, self).__init__(all_sprites, menu_sprites, koin_sprites)
+        super(Coin, self).__init__(all_sprites, menu_sprites, koin_sprites)
         columns, rows = 3, 2
         sheet = load_image(['environment', 'koin.png'], -1)
         self.cut_sheet(sheet, columns, rows)

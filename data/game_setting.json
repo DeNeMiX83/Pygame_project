@@ -2,5 +2,11 @@
   "ship_1_price": 0,
   "ship_2_price": 500,
   "ship_3_price": 1000,
-  "ship_4_price": 2000
+  "ship_4_price": 2000,
+  "specific_weapon_damage_price": 100,
+  "specific_power_magnet_price": 100,
+  "specific_hp_max_price": 100,
+  "specific_weapon_damage_power": 10,
+  "specific_power_magnet_power": 1,
+  "specific_hp_max_power": 50
 }

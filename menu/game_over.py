@@ -3,18 +3,11 @@ import pygame
 from data.config import screen, FPS, width, height
 import game_things
 from game_things import info
-from sprites.config import all_sprites, menu_sprites, player_sprites, meteors_sprites, shot_sprites
+from sprites.config import all_sprites, menu_sprites, player_sprites, meteors_sprites, shot_sprites, \
+    game_over_sprites, game_pause_sprites
+from sprites.funk.game import view_koins
 from sprites.menu.game_over import GameOver
 from menu.start_menu import terminate, start_screen
-
-
-def view_koins(koins):
-    font = pygame.font.Font(None, 50)
-    string_rendered = font.render(f'Собрано монет: {koins}', 1, (255, 255, 255))
-    intro_rect = string_rendered.get_rect()
-    intro_rect.x = width * 0.49 - intro_rect.w // 2
-    intro_rect.y = height * 0.6
-    screen.blit(string_rendered, intro_rect)
 
 
 def clear_sprites_group():
@@ -23,6 +16,7 @@ def clear_sprites_group():
     player_sprites.empty()
     meteors_sprites.empty()
     shot_sprites.empty()
+    game_pause_sprites.empty()
 
 
 def game_over():
@@ -43,7 +37,7 @@ def game_over():
                     event.type == pygame.MOUSEBUTTONDOWN:
                 start_screen()
                 return
-        menu_sprites.update()
-        menu_sprites.draw(screen)
+        game_over_sprites.update()
+        game_over_sprites.draw(screen)
         pygame.display.flip()
         clock.tick(FPS)

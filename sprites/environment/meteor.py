@@ -3,19 +3,22 @@ from random import choice, randrange
 
 import pygame
 
-from data.config import size, width, height, FPS
+from data.config import width, height
 from data.images.funk import load_image
 from sprites.base_animate_sprite import BaseAnimateSprite
 from sprites.config import all_sprites, meteors_sprites, player_sprites, shot_sprites, menu_sprites
-from sprites.environment.koin import Koin
+from sprites.environment.coin import Coin
 from sprites.show_hp import ShowHP
 
 
 class Meteor(BaseAnimateSprite):
     def __init__(self):
         super(Meteor, self).__init__(all_sprites, meteors_sprites, menu_sprites)
-        columns, rows = 8, 6
-        sheet = load_image(['environment', f'meteors_3.png'])
+        columns, rows = 8, 8
+        sheet = load_image(['environment', f'meteors_4.png'])
+        rect = sheet.get_rect()
+        d_size = 2
+        sheet = pygame.transform.scale(sheet, (int(rect.w * d_size), int(rect.h * d_size)))
         self.cut_sheet(sheet, columns, rows)
         self.image = self.frames[self.cur_frame]
         self.place()
@@ -29,7 +32,7 @@ class Meteor(BaseAnimateSprite):
         yes = True
         while yes:
             self.rect.x = randrange(width - self.rect.w)
-            self.rect.y = randrange(0 - height, -100)
+            self.rect.y = randrange(0 - height, -self.rect.h)
             if len(pygame.sprite.spritecollide(self, meteors_sprites, False)) == 1:
                 yes = False
 
@@ -51,7 +54,10 @@ class Meteor(BaseAnimateSprite):
         self.frames = choice(n_frames)
 
     def update(self, *arg):
-        self.rect.y += 1
+        self.rect.y += 2
+        if self.rect.y > height:
+            self.kill()
+            return
         if pygame.sprite.spritecollide(self, player_sprites, False, pygame.sprite.collide_circle):
             self.hp -= 30
         for shot in pygame.sprite.spritecollide(self, shot_sprites, True, pygame.sprite.collide_circle):
@@ -59,7 +65,7 @@ class Meteor(BaseAnimateSprite):
         self.show_hp()
         if self.hp <= 0:
             self.kill()
-            Koin(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h // 2)
+            Coin(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h // 2)
         if time.time() <= self.time_stop:
             return
         self.cur_frame = (self.cur_frame + 1) % len(self.frames)

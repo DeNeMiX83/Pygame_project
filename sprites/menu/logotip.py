@@ -10,6 +10,5 @@ class Logotip(pygame.sprite.Sprite):
         super(Logotip, self).__init__(menu_sprites)
         self.image = load_image(['menu', 'logotip.png'])
         self.rect = self.image.get_rect()
-        print(self.rect)
         self.rect.x = width - self.rect.w
         self.rect.y = height - self.rect.h

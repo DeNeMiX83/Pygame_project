@@ -2,19 +2,22 @@ import pygame
 
 from data.images.funk import load_image
 from game_things import info
-from sprites.config import menu_sprites, menu_ships_sprites, choice_ship_sprites
+from sprites.config import menu_sprites, menu_ships_sprites, choice_ship_sprites, \
+    menu_specific_sprites
 from sprites.player.show_ship import ShowShip
 
 
-class BtnBuyShip(pygame.sprite.Sprite):
-    def __init__(self, x, y, prise, ship_type):
-        super(BtnBuyShip, self).__init__(menu_sprites, choice_ship_sprites)
-        self.image = load_image(['menu', 'buy_ship_1.png'])
+class BtnBuySpecific(pygame.sprite.Sprite):
+    def __init__(self, x, y, prise, power, obj):
+        super(BtnBuySpecific, self).__init__(menu_sprites, menu_specific_sprites)
+        self.image = load_image(['menu', 'buy_1.png'])
         self.rect = self.image.get_rect()
         self.rect.x = x - self.rect.w // 2
         self.rect.y = y - self.rect.h // 2
-        self.ship_type = ship_type
+        self.type_specific = obj.type
         self.prise = prise
+        self.power = power
+        self.obj = obj
 
     def view_price(self, size=24):
         font = pygame.font.Font(None, size)
@@ -36,16 +39,11 @@ class BtnBuyShip(pygame.sprite.Sprite):
 
     def update(self, *args):
         if self.rect.collidepoint(pygame.mouse.get_pos()):
-            self.resize('buy_ship_2.png', 28)
+            self.resize('buy_2.png', 28)
         else:
-            self.resize('buy_ship_1.png')
+            self.resize('buy_1.png')
         if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
             if info['koins'] >= self.prise:
                 info['koins'] -= self.prise
-                info[f'ship_{self.ship_type}']['condition'] = 'open'
-                for sprite in choice_ship_sprites:
-                    if sprite.ship_type == self.ship_type:
-                        if isinstance(sprite, ShowShip):
-                            sprite.enable = True
-                        else:
-                            sprite.kill()
+                info[f'{self.type_specific}'] += self.power
+                self.obj.up()

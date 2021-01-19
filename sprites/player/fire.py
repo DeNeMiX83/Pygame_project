@@ -1,15 +1,11 @@
 import time
-
-import pygame
-
-from data.config import size, width, height, FPS
 from data.images.funk import load_image
 from sprites.base_animate_sprite import BaseAnimateSprite
 from sprites.config import all_sprites, player_sprites
 
 
 class ShipFire(BaseAnimateSprite):
-    def __init__(self, x, y):
+    def __init__(self, x, y, obj):
         super(ShipFire, self).__init__(all_sprites, player_sprites)
         columns, rows = 4, 1
         sheet = load_image(['player', f'fire.png'], -1)
@@ -18,6 +14,7 @@ class ShipFire(BaseAnimateSprite):
         self.move(x, y)
         self.time_tik = 0.1
         self.put_timer()
+        self.obj = obj
 
     def move(self, x, y):
         self.rect.x = x - self.rect.w // 2 + 2

@@ -1,12 +1,9 @@
 import time
-from time import sleep
-
 import pygame
-
-from data.config import size, width, height, FPS
+from data.config import width, height
 from data.images.funk import load_image
 from sprites.base_time import BaseTime
-from sprites.config import all_sprites, menu_sprites, player_sprites, meteors_sprites, koin_sprites
+from sprites.config import all_sprites, player_sprites, meteors_sprites, koin_sprites
 from sprites.environment.bum import Bum
 from sprites.player.fire import ShipFire
 from sprites.player.space_ship_shot import SpaceShipShot
@@ -51,11 +48,9 @@ class SpaceShip(BaseTime):
                 koin.rect.y -= 3
 
     def show_hp(self):
-        # self.sprite_hp.move(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h, self.hp / self.hp_max)
         x = width // 2
         w = 15
         y = height - w
-        prosent_hp = self.hp / self.hp_max
         self.sprite_hp.move(x, y, w, width)
 
     def can_shoot(self):
@@ -68,7 +63,6 @@ class SpaceShip(BaseTime):
         self.stop = True
         for fire in self.ship_fire:
             fire.kill()
-        self.sprite_hp.kill()
         self.remove(all_sprites)
         Bum(self, self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h // 2)
 
@@ -81,7 +75,7 @@ class SpaceShip(BaseTime):
         self.fire_cord = [(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h)]
 
     def create_fire(self):
-        self.ship_fire = [ShipFire(*cord) for cord in self.fire_cord]
+        self.ship_fire = [ShipFire(*cord, self) for cord in self.fire_cord]
 
     def update(self, *args):
         if self.stop:
@@ -91,10 +85,8 @@ class SpaceShip(BaseTime):
         self.magnit_koin()
         for n, fire in enumerate(self.ship_fire):
             fire.move(*self.fire_cord[n])
-        for meteor in pygame.sprite.spritecollide(self, meteors_sprites, True, pygame.sprite.collide_circle):
+        if pygame.sprite.spritecollide(self, meteors_sprites, True, pygame.sprite.collide_circle):
             self.hp -= 50
-            meteor.sprite_hp.kill()
-            print(meteor)
         self.can_shoot()
         self.show_hp()
         if self.hp <= 0:

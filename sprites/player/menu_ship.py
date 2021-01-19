@@ -15,4 +15,4 @@ class MenuSpaceShip(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.x = x - self.rect.width // 2
-        self.rect.y = y * 1.1 - self.rect.height // 2
+        self.rect.y = y * 1.06 - self.rect.height // 2

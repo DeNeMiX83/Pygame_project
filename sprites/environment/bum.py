@@ -1,11 +1,8 @@
 import time
 
-import pygame
-
-from data.config import size, width, height, FPS
 from data.images.funk import load_image
 from sprites.base_animate_sprite import BaseAnimateSprite
-from sprites.config import all_sprites, player_sprites
+from sprites.config import all_sprites
 
 
 class Bum(BaseAnimateSprite):

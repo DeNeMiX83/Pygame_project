@@ -9,9 +9,9 @@ from sprites.base_animate_sprite import BaseAnimateSprite
 from sprites.config import menu_sprites, menu_ships_sprites
 
 
-class Magaz(BaseAnimateSprite):
+class Shop(BaseAnimateSprite):
     def __init__(self, center):
-        super(Magaz, self).__init__(menu_sprites)
+        super(Shop, self).__init__(menu_sprites)
         columns, rows = 2, 1
         sheet = load_image(['menu', f'magaz.png'])
         self.cut_sheet(sheet, columns, rows)
