@@ -3,10 +3,10 @@ import pygame
 from data.config import size, width, height
 from data.images.funk import load_image
 from sprites.config import all_sprites, menu_sprites
-from sprites.base_resize_sprite import BaseResize
+from sprites.base_zoom_sprite import BaseZoom
 
 
-class BtnShip(BaseResize):
+class BtnShip(BaseZoom):
     def __init__(self, rect):
         super(BtnShip, self).__init__(menu_sprites)
         self.image = load_image(['menu', 'btn_ship.png'])
@@ -18,7 +18,7 @@ class BtnShip(BaseResize):
 
     def update(self, *args):
         if self.rect.collidepoint(pygame.mouse.get_pos()):
-            self.resize(self.image_2)
+            self.zoom(self.image_2)
         else:
-            self.resize(self.image_1)
+            self.zoom(self.image_1)
         self.rect.x = self.x_cur

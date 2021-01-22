@@ -3,10 +3,10 @@ import pygame
 from data.config import size, width, height
 from data.images.funk import load_image
 from sprites.config import all_sprites, menu_sprites
-from sprites.base_resize_sprite import BaseResize
+from sprites.base_zoom_sprite import BaseZoom
 
 
-class BtnContinue(BaseResize):
+class BtnContinue(BaseZoom):
     def __init__(self, x, y, *group):
         super(BtnContinue, self).__init__(*group)
         self.image = load_image(['menu', 'btn_continue.png'])

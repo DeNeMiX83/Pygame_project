@@ -15,11 +15,9 @@ class Meteor(BaseAnimateSprite):
     def __init__(self):
         super(Meteor, self).__init__(all_sprites, meteors_sprites, menu_sprites)
         columns, rows = 8, 8
-        sheet = load_image(['environment', f'meteors_4.png'])
-        rect = sheet.get_rect()
-        d_size = 2
-        sheet = pygame.transform.scale(sheet, (int(rect.w * d_size), int(rect.h * d_size)))
-        self.cut_sheet(sheet, columns, rows)
+        self.image = load_image(['environment', f'meteors_2.png'])
+        self.resize(2)
+        self.cut_sheet(self.image, columns, rows)
         self.image = self.frames[self.cur_frame]
         self.place()
         self.radius = self.rect.w * 0.20
@@ -55,7 +53,7 @@ class Meteor(BaseAnimateSprite):
 
     def update(self, *arg):
         self.rect.y += 2
-        if self.rect.y > height:
+        if self.rect.y > height + 50:
             self.kill()
             return
         if pygame.sprite.spritecollide(self, player_sprites, False, pygame.sprite.collide_circle):

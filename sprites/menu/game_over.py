@@ -1,13 +1,21 @@
 import pygame
 
-from data.config import size, width, height, screen
-from data.images.funk import load_image
-from sprites.config import all_sprites, menu_sprites, game_over_sprites
+from data.config import size, width, height
+from sprites.config import  game_over_sprites
+from sprites.menu.game_over_title import GameOverTitle
+from sprites.menu.prizrak import Prizrak
 
 
 class GameOver(pygame.sprite.Sprite):
     def __init__(self):
         super(GameOver, self).__init__(game_over_sprites)
-        x, y, w, h = screen.get_rect()
-        self.image = pygame.transform.scale(load_image(['menu', 'game_over.jpg'], -1), (w, h))
+        self.image = pygame.Surface(size)
         self.rect = self.image.get_rect()
+        self.draw_prizrak()
+        self.draw_title()
+
+    def draw_prizrak(self):
+        Prizrak(width * 0.5, height * 0.4)
+
+    def draw_title(self):
+        GameOverTitle(width * 0.5, height * 0.4)

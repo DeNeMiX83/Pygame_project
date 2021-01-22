@@ -1,11 +1,11 @@
 import json
 import sys
 from data.config import screen
-from game_setting import setting
-from game_things import info
+from game.game_setting import setting
+from game.game_things import info
 from sprites.config import *
 from sprites.environment.coin import Coin
-from sprites.funk.game import create_space
+from game.funk.game import create_space
 from sprites.menu.ball_on_ship import BallOnShip
 from sprites.menu.logotip import Logotip
 from sprites.menu.btn_exit import BtnExit
@@ -35,6 +35,27 @@ def terminate():
     pygame.quit()
     sys.exit()
 
+def delete_specific_menu():
+    for sprite in menu_specific_sprites:
+        sprite.kill()
+
+
+def delete_meteor_menu():
+    for meteor in meteors_sprites:
+        meteor.kill()
+
+
+def delete_ship_menu():
+    for sprite in choice_ship_sprites:
+        sprite.kill()
+
+
+def delete_menu_sprites(coins):
+    menu_sprites.empty()
+    coins.remove(all_sprites)
+    delete_meteor_menu()
+    delete_specific_menu()
+
 
 def start_screen():
     clock = pygame.time.Clock()
@@ -59,21 +80,15 @@ def start_screen():
                 terminate()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if btn_start.rect.collidepoint(event.pos):
-                    menu_sprites.empty()
-                    coins.remove(all_sprites)
-                    for meteor in meteors_sprites:
-                        meteor.kill()
+                    delete_menu_sprites(coins)
                     return
-                if btn_specific.rect.collidepoint(event.pos) and \
-                        not menu_specific_sprites.sprites():
-                    for sprite in choice_ship_sprites:
-                        sprite.kill()
+                if btn_specific.rect.collidepoint(event.pos) and not menu_specific_sprites.sprites():
+                    delete_ship_menu()
                     view_specific(magaz, ship.type_ship)
                     icon_shop.kill()
                     icon_shop = Shop(magaz.rect.center)
                 if btn_ship.rect.collidepoint(event.pos) and not choice_ship_sprites.sprites():
-                    for sprite in menu_specific_sprites:
-                        sprite.kill()
+                    delete_specific_menu()
                     view_ships(magaz)
                     icon_shop.kill()
                     icon_shop = Shop(magaz.rect.center)

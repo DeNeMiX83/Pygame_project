@@ -1,10 +1,8 @@
 import pygame
 
 from data.images.funk import load_image
-from game_things import info
-from sprites.config import menu_sprites, menu_ships_sprites, choice_ship_sprites, \
-    menu_specific_sprites
-from sprites.player.show_ship import ShowShip
+from game.game_things import info
+from sprites.config import menu_sprites, menu_specific_sprites
 
 
 class BtnBuySpecific(pygame.sprite.Sprite):
@@ -45,5 +43,7 @@ class BtnBuySpecific(pygame.sprite.Sprite):
         if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
             if info['koins'] >= self.prise:
                 info['koins'] -= self.prise
-                info[f'ship_{info["ship_type"]}'][f'{self.type_specific}'] += self.power
+                type_ship = info["ship_type"]
+                value = info[f'ship_{type_ship}'][f'{self.type_specific}'] + self.power
                 self.obj.up()
+                info[f'ship_{type_ship}'][f'{self.type_specific}'] = round(value, 1)

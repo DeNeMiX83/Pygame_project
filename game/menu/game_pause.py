@@ -1,15 +1,11 @@
 import pygame
 
-import game_things
-from data.config import width, height, size, screen, FPS
-from game_things import info
-from menu.game_over import game_over
-from menu.start_menu import terminate, FPS
+from data.config import width, height, size, screen
+from game.menu.game_over import game_over
+from game.menu.start_menu import terminate, start_screen
 from sprites.config import game_pause_sprites
-from sprites.funk.game import view_koins
 from sprites.menu.btn_continue import BtnContinue
 from sprites.menu.btn_exit import BtnExit
-from sprites.menu.btn_start import BtnStart
 from sprites.menu.pause import Pause
 
 
@@ -31,6 +27,7 @@ def game_pause():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if btn_exit.rect.collidepoint(event.pos):
                     game_over()
+                    start_screen()
                     return True
                 if btn_continue.rect.collidepoint(event.pos):
                     return

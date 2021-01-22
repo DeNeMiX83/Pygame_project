@@ -1,1 +1,1 @@
-import pygame
+print(5 // 2)

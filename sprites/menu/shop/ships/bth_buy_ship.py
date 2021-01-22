@@ -1,8 +1,8 @@
 import pygame
 
 from data.images.funk import load_image
-from game_things import info
-from sprites.config import menu_sprites, menu_ships_sprites, choice_ship_sprites
+from game.game_things import info
+from sprites.config import menu_sprites, choice_ship_sprites
 from sprites.player.show_ship import ShowShip
 
 

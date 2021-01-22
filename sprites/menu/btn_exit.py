@@ -3,10 +3,10 @@ import pygame
 from data.config import size, width, height
 from data.images.funk import load_image
 from sprites.config import all_sprites, menu_sprites
-from sprites.base_resize_sprite import BaseResize
+from sprites.base_zoom_sprite import BaseZoom
 
 
-class BtnExit(BaseResize):
+class BtnExit(BaseZoom):
     def __init__(self, x, y, *group):
         super(BtnExit, self).__init__(*group)
         self.image_1 = load_image(['menu', 'btn_exit_1.png'])

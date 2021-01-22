@@ -20,8 +20,8 @@ class Space(BaseTime):
         self.meteors = []
         self.time_tik = 0.015
         if y >= 0:
-            self.planets = [Planet() for _ in range(3)]
-            self.meteors = [Meteor() for _ in range(3)]
+            self.planets = [Planet() for _ in range(5)]
+            self.meteors = [Meteor() for _ in range(5)]
         self.put_timer()
 
     def generate_spase(self, n):
@@ -38,5 +38,8 @@ class Space(BaseTime):
         self.rect = self.rect.move(0, 1)
         if self.rect.y == height:
             self.rect.y = 0 - height
+        for meteor in self.meteors:
+            if meteor.rect.y > height:
+                meteor.place()
         self.put_timer()
 

@@ -1,7 +1,9 @@
+from time import sleep
+
 import pygame
 
+from game import game_things
 from data.config import height, FPS, screen, width
-from game_things import info
 from sprites.environment.meteor import Meteor
 from sprites.environment.space import Space
 from sprites.player.lvl_1.lvl1 import ShipLevel1
@@ -21,10 +23,10 @@ def create_space():
 
 def get_space_ship(type):
     ship = None
-    damage = info[f'ship_{type}']['damage']
-    weapon_damage = info[f'ship_{type}']['weapon_damage']
-    power_magnet = info[f'ship_{type}']['power_magnet']
-    hp_max = info[f'ship_{type}']['hp_max']
+    damage = game_things.info[f'ship_{type}']['damage']
+    weapon_damage = game_things.info[f'ship_{type}']['weapon_damage']
+    power_magnet = game_things.info[f'ship_{type}']['power_magnet']
+    hp_max = game_things.info[f'ship_{type}']['hp_max']
     if type == 1:
         ship = ShipLevel1(type, damage, weapon_damage, power_magnet, hp_max)
     if type == 2:
@@ -43,11 +45,22 @@ def create_meteor():
         Meteor()
 
 
-def view_koins(koins, d_x=0.49, d_y=0.6):
-    font = pygame.font.Font(None, 50)
+def view_koins(d_x=0.49, d_y=0.6, font_size=50, x_center=True, y_center=False):
+    koins = game_things.game_koins
+    font = pygame.font.Font(None, font_size)
     string_rendered = font.render(f'Собрано монет: {koins}', 1, (255, 255, 255))
     intro_rect = string_rendered.get_rect()
-    intro_rect.x = width * d_x - intro_rect.w // 2
-    intro_rect.y = height * d_y - intro_rect.h // 2
+    intro_rect.x = width * d_x - (intro_rect.w // 2 if x_center else 0)
+    intro_rect.y = height * d_y - (intro_rect.h // 2 if y_center else 0)
+    screen.blit(string_rendered, intro_rect)
+
+
+def view_score(d_x=0.49, d_y=0.6, font_size=50, x_center=True, y_center=False):
+    score = game_things.game_score
+    font = pygame.font.Font(None, font_size)
+    string_rendered = font.render(f'Счет: {score}', 1, (255, 255, 255))
+    intro_rect = string_rendered.get_rect()
+    intro_rect.x = width * d_x - (intro_rect.w // 2 if x_center else 0)
+    intro_rect.y = height * d_y - (intro_rect.h // 2 if y_center else 0)
     screen.blit(string_rendered, intro_rect)
 

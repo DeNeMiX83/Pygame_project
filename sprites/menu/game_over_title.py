@@ -1,25 +1,20 @@
 import time
-
-import pygame
-
 from data.images.funk import load_image
 from sprites.base_animate_sprite import BaseAnimateSprite
-from sprites.config import all_sprites, player_sprites, menu_sprites
+from sprites.config import all_sprites, player_sprites, game_over_sprites
 
 
-class BallOnShip(BaseAnimateSprite):
+class GameOverTitle(BaseAnimateSprite):
     def __init__(self, x, y):
-        super(BallOnShip, self).__init__(menu_sprites)
-        columns, rows = 10, 3
-        self.image = load_image(['menu', f'ball.png'])
+        super(GameOverTitle, self).__init__(game_over_sprites)
+        columns, rows = 2, 1
+        self.image = load_image(['menu', f'game_over_title.png'])
         self.resize(0.8)
         self.cut_sheet(self.image, columns, rows)
-        del self.frames[-1]
         self.image = self.frames[self.cur_frame]
-        self.rect = self.image.get_rect()
         self.rect.x = x - self.rect.w // 2
-        self.rect.y = y * 1.1 - self.rect.h // 2
-        self.time_tik = 0.13
+        self.rect.y = y - self.rect.h // 2
+        self.time_tik = 1
         self.put_timer()
 
     def update(self, *arg):

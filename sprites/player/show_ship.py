@@ -1,18 +1,17 @@
 import pygame
 
 from data.images.funk import load_image
-from sprites.config import menu_sprites, menu_ships_sprites, choice_ship_sprites
 from sprites.base_resize_sprite import BaseResize
+from sprites.config import menu_sprites, menu_ships_sprites, choice_ship_sprites
+from sprites.base_zoom_sprite import BaseZoom
 
 
-class ShowShip(BaseResize):
+class ShowShip(BaseZoom, BaseResize):
     def __init__(self, x, y, type, enable=True):
         group = [menu_sprites, menu_ships_sprites, choice_ship_sprites]
         super(ShowShip, self).__init__(*group, dir='player')
-        image = load_image(['player', f'lvl_{type}', f'lvl{type}.png'], -1)
-        rect = image.get_rect()
-        d_size = 1.5
-        self.image = pygame.transform.scale(image, (int(rect.w * d_size), int(rect.h * d_size)))
+        self.image = load_image(['player', f'lvl_{type}', f'lvl{type}.png'], -1)
+        self.resize(1.5)
         self.put_image()
         self.rect = self.image.get_rect()
         self.rect.x = x - self.rect.w // 2

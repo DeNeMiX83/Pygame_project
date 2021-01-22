@@ -1,7 +1,6 @@
 import pygame
 
-from data.images.funk import load_image
-from game_things import info
+from game.game_things import info
 from sprites.config import menu_sprites, menu_specific_sprites
 
 
@@ -11,7 +10,7 @@ class ViewShipSpecific(pygame.sprite.Sprite):
         super(ViewShipSpecific, self).__init__(*group)
         self.fon = pygame.Surface(size)
         self.fon.set_colorkey((0, 0, 0))
-        self.font = pygame.font.Font(None, 28)
+        self.font = pygame.font.Font(None, 30)
         self.type_ship = type_ship
         self.image = self.fon
         self.rect = self.image.get_rect()
@@ -27,7 +26,7 @@ class ViewShipSpecific(pygame.sprite.Sprite):
         text_coord = self.fon.get_rect().h // 3
         text = [f'Дамаг: {weapon_damage}',
                 f'Сила магнита: {power_magnet}',
-                f'Макс жизней: {hp_max}']
+                f'Макс здоровье: {hp_max}']
         for line in text:
             string_rendered = self.font.render(line, 1, (255, 255, 255))
             intro_rect = string_rendered.get_rect()

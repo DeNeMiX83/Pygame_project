@@ -3,10 +3,10 @@ import pygame
 from data.config import size, width, height
 from data.images.funk import load_image
 from sprites.config import all_sprites, menu_sprites
-from sprites.base_resize_sprite import BaseResize
+from sprites.base_zoom_sprite import BaseZoom
 
 
-class BtnSpecific(BaseResize):
+class BtnSpecific(BaseZoom):
     def __init__(self, rect):
         super(BtnSpecific, self).__init__(menu_sprites)
         self.image = load_image(['menu', 'btn_specifications.png'])
@@ -18,7 +18,7 @@ class BtnSpecific(BaseResize):
 
     def update(self, *args):
         if self.rect.collidepoint(pygame.mouse.get_pos()):
-            self.resize(self.image_2)
+            self.zoom(self.image_2)
         else:
-            self.resize(self.image_1)
+            self.zoom(self.image_1)
         self.rect.x = self.x_cur

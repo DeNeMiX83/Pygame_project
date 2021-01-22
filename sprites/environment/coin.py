@@ -2,7 +2,7 @@ import time
 
 import pygame
 
-import game_things
+from game import game_things
 from data.images.funk import load_image
 from sprites.base_animate_sprite import BaseAnimateSprite
 from sprites.config import all_sprites, player_sprites, menu_sprites, koin_sprites
