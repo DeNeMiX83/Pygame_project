@@ -9,7 +9,7 @@ from sprites.base_zoom_sprite import BaseZoom
 class ShowShip(BaseZoom, BaseResize):
     def __init__(self, x, y, type, enable=True):
         group = [menu_sprites, menu_ships_sprites, choice_ship_sprites]
-        super(ShowShip, self).__init__(*group, dir='player')
+        super(ShowShip, self).__init__(*group)
         self.image = load_image(['player', f'lvl_{type}', f'lvl{type}.png'], -1)
         self.resize(1.5)
         self.put_image()

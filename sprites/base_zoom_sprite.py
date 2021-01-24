@@ -1,12 +1,12 @@
 import pygame
 from data.images.funk import load_image
+from sprites.base_time import BaseTime
 
 
-class BaseZoom(pygame.sprite.Sprite):
-    def __init__(self, *group, dir='menu', d_size=1.1):
+class BaseZoom(BaseTime):
+    def __init__(self, *group, d_size=1.1):
         super(BaseZoom, self).__init__(*group)
         # self.image = 'btn_exit.png'
-        self.dir = dir
         self.d_size = d_size
         # self.put_image()
 

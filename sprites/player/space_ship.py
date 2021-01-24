@@ -6,6 +6,7 @@ from sprites.base_time import BaseTime
 from sprites.config import all_sprites, player_sprites, meteors_sprites, koin_sprites
 from sprites.environment.bum import Bum
 from sprites.player.fire import ShipFire
+from sprites.player.ship_hp import ShipHp
 from sprites.player.space_ship_shot import SpaceShipShot
 from sprites.show_hp import ShowHP
 
@@ -24,12 +25,12 @@ class SpaceShip(BaseTime):
         self.rect.x = width // 2 - self.rect.width // 2
         self.rect.y = height * 0.38 - self.rect.height // 2
         self.type = type
-        self.sprite_hp = ShowHP(width // 2, height - 15, self, 15, width)
         self.ship_fire = []
         self.fire_cord = []
         self.time_tik = 0.2
         self.put_timer()
         self.stop = False
+        self.show_hp = ShipHp(width, height, self)
         # self.put_fire()
         # self.create_fire()
 
@@ -46,12 +47,6 @@ class SpaceShip(BaseTime):
                 koin.rect.x -= 3
             if d_y <= 0:
                 koin.rect.y -= 3
-
-    def show_hp(self):
-        x = width // 2
-        w = 15
-        y = height - w
-        self.sprite_hp.move(x, y, w, width)
 
     def can_shoot(self):
         if time.time() >= self.time_stop:
@@ -88,7 +83,6 @@ class SpaceShip(BaseTime):
         if pygame.sprite.spritecollide(self, meteors_sprites, True, pygame.sprite.collide_circle):
             self.hp -= 50
         self.can_shoot()
-        self.show_hp()
         if self.hp <= 0:
             self.ship_kill()
 

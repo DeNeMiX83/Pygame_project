@@ -10,7 +10,7 @@ from sprites.menu.shop.specific.specific_up import SpecificUp
 class Specific(BaseZoom, BaseResize):
     def __init__(self, x, y, type):
         group = [menu_sprites, menu_specific_sprites]
-        super(Specific, self).__init__(*group, dir='menu')
+        super(Specific, self).__init__(*group)
         self.image = load_image(['menu', f'specific_{type}.png'])
         self.resize(1)
         self.put_image()
