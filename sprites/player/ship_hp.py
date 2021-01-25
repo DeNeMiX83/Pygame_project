@@ -13,7 +13,7 @@ class ShipHp(BaseAnimateSprite):
         super(ShipHp, self).__init__(all_sprites, player_sprites)
         columns, rows = 3, 1
         self.image = load_image(['player', f'view_hp.png'])
-        self.resize(0.5)
+        self.resize(0.6)
         self.cut_sheet(self.image, columns, rows)
         self.image = self.frames[self.cur_frame]
         self.rect.x = x - self.rect.w
@@ -26,10 +26,10 @@ class ShipHp(BaseAnimateSprite):
         self.view_hp = False
 
     def show_hp(self):
-        x = width - self.rect.w * 0.96
+        x = width - self.rect.w * 0.87
         w = 17
-        y = height - self.rect.h * 0.35
-        self.sprite_hp.move(x, y, w, self.rect.w * 0.65)
+        y = height - self.rect.h * 0.31
+        self.sprite_hp.move(x, y, w, self.rect.w * 0.6)
 
     def update(self, *arg):
         if self.ship.hp / self.ship.hp_max * 100 < 33:

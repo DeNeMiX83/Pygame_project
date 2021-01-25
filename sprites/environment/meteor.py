@@ -15,7 +15,7 @@ class Meteor(BaseAnimateSprite):
     def __init__(self):
         super(Meteor, self).__init__(all_sprites, meteors_sprites, menu_sprites)
         columns, rows = 8, 8
-        self.image = load_image(['environment', f'meteors_2.png'])
+        self.image = load_image(['environment', f'meteors.png'])
         self.resize(2)
         self.cut_sheet(self.image, columns, rows)
         self.image = self.frames[self.cur_frame]

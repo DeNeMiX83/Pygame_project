@@ -6,7 +6,7 @@
   "specific_weapon_damage_price": 100,
   "specific_power_magnet_price": 100,
   "specific_hp_max_price": 100,
-  "specific_weapon_damage_power": 5,
+  "specific_weapon_damage_power": 1,
   "specific_power_magnet_power": 0.1,
   "specific_hp_max_power": 10
 }
