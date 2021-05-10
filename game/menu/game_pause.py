@@ -1,6 +1,7 @@
 import pygame
 
 from data.config import width, height, size, screen
+from game import game_things
 from game.menu.game_over import game_over
 from game.menu.start_menu import terminate, start_screen
 from sprites.config import game_pause_sprites
@@ -26,10 +27,11 @@ def game_pause():
                 terminate()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if btn_exit.rect.collidepoint(event.pos):
-                    game_over()
-                    start_screen()
-                    return True
+                    game_things.player.hp = 0
+                    pygame.mouse.set_visible(False)
+                    return
                 if btn_continue.rect.collidepoint(event.pos):
+                    pygame.mouse.set_visible(False)
                     return
         screen.blit(screen_copy, (0, 0))
         fon.fill((0, 0, 0))

@@ -14,5 +14,3 @@ class BtnStart(BaseZoom):
         self.put_image(load=False)
         self.rect.x = x - self.rect.width // 2
         self.rect.y = y * 1.6 - self.rect.height // 2
-        print(self.rect, 2323423)
-

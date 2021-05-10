@@ -52,12 +52,10 @@ class Meteor(BaseAnimateSprite):
         self.frames = choice(n_frames)
 
     def update(self, *arg):
-        self.rect.y += 2
+        self.rect.y += 1
         if self.rect.y > height + 50:
             self.kill()
             return
-        if pygame.sprite.spritecollide(self, player_sprites, False, pygame.sprite.collide_circle):
-            self.hp -= 30
         for shot in pygame.sprite.spritecollide(self, shot_sprites, True, pygame.sprite.collide_circle):
             self.hp -= shot.damage
         self.show_hp()

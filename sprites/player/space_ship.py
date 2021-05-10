@@ -76,8 +76,8 @@ class SpaceShip(BaseTime):
         if self.stop:
             return
         self.follow_the_mouse()
-        self.put_fire()
         self.magnit_koin()
+        self.put_fire()
         for n, fire in enumerate(self.ship_fire):
             fire.move(*self.fire_cord[n])
         if pygame.sprite.spritecollide(self, meteors_sprites, True, pygame.sprite.collide_circle):

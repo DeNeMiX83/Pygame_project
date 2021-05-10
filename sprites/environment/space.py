@@ -26,7 +26,6 @@ class Space(BaseTime):
 
     def generate_spase(self, n):
         screen = pygame.Surface(size)
-        # pygame.draw.line(screen, (255, 0, 0), (0, height), (width, height), 8)
         for _ in range(n):
             pygame.draw.circle(screen, (255, 255, 255),
                                (choice(range(width)), choice(range(height - 2))), choice(range(1, 4)))
@@ -37,7 +36,7 @@ class Space(BaseTime):
             return
         self.rect = self.rect.move(0, 1)
         if self.rect.y == height:
-            self.rect.y = 0 - height
+            self.rect.y = 1 - height
         for meteor in self.meteors:
             if meteor.rect.y > height:
                 meteor.place()

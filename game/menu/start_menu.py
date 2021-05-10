@@ -35,6 +35,7 @@ def terminate():
     pygame.quit()
     sys.exit()
 
+
 def delete_specific_menu():
     for sprite in menu_specific_sprites:
         sprite.kill()
@@ -53,7 +54,7 @@ def delete_ship_menu():
 def delete_menu_sprites(coins):
     menu_sprites.empty()
     coins.remove(all_sprites)
-    delete_meteor_menu()
+    # delete_meteor_menu()
     delete_specific_menu()
 
 
