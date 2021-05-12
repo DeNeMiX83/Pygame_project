@@ -12,7 +12,7 @@ from sprites.show_hp import ShowHP
 
 
 class Meteor(BaseAnimateSprite):
-    def __init__(self):
+    def __init__(self, hp_bost=0):
         super(Meteor, self).__init__(all_sprites, meteors_sprites, menu_sprites)
         columns, rows = 8, 8
         self.image = load_image(['environment', f'meteors.png'])
@@ -22,7 +22,7 @@ class Meteor(BaseAnimateSprite):
         self.place()
         self.radius = self.rect.w * 0.20
         self.time_tik = 0.1
-        self.hp_max = 70
+        self.hp_max = 70 + hp_bost
         self.hp = self.hp_max
         self.sprite_hp = ShowHP(self.rect.x + self.rect.w // 2, self.rect.y + self.rect.h, self)
 
@@ -30,7 +30,7 @@ class Meteor(BaseAnimateSprite):
         yes = True
         while yes:
             self.rect.x = randrange(width - self.rect.w)
-            self.rect.y = randrange(0 - height, -self.rect.h)
+            self.rect.y = randrange(int(0 - height * 0.2), -self.rect.h)
             if len(pygame.sprite.spritecollide(self, meteors_sprites, False)) == 1:
                 yes = False
 

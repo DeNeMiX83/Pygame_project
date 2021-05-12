@@ -1,4 +1,4 @@
-from time import sleep
+from time import sleep, time
 
 import pygame
 
@@ -52,4 +52,5 @@ def view_score(d_x=0.49, d_y=0.6, font_size=50, x_center=True, y_center=False):
     intro_rect.x = width * d_x - (intro_rect.w // 2 if x_center else 0)
     intro_rect.y = height * d_y - (intro_rect.h // 2 if y_center else 0)
     screen.blit(string_rendered, intro_rect)
+
 

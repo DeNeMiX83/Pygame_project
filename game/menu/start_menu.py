@@ -54,7 +54,7 @@ def delete_ship_menu():
 def delete_menu_sprites(coins):
     menu_sprites.empty()
     coins.remove(all_sprites)
-    # delete_meteor_menu()
+    delete_meteor_menu()
     delete_specific_menu()
 
 
